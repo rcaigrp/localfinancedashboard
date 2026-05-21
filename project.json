@@ -1,12 +1,12 @@
 {
-  "goal": "Create a local finance dashboard to track budgets and expenses.",
+  "goal": "Build a local finance dashboard to track expenses and income without external dependencies.",
   "acceptance_criteria": [
     "dashboard module exists and can be imported",
-    "get_budget function returns user's budget data",
-    "get_expenses function returns user's expense data",
-    "save_dashboard writes dashboard data to a file"
+    "parse_transactions function processes CSV data",
+    "generate_summary function returns total income and expenses",
+    "render_dashboard function saves a report to a file"
   ],
-  "meeting_budget": 4,
+  "meeting_budget": 6,
   "meetings_held": 0,
   "status": "active"
 }
