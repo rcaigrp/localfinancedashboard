@@ -23,3 +23,7 @@ Closing the text_analyzer project as all criteria are met and tests passed. Star
 ## Turn 7 — Manager (2026-05-21 08:25 UTC)
 
 Completed text_analyzer project. Status set to complete. Proposing next project: Local Finance Dashboard based on queued user ideas.
+
+## Turn 8 — Manager (2026-05-21 08:28 UTC)
+
+Created project.json, README.md, and acceptance_tests.py for Local Finance Dashboard. Defined 4 acceptance criteria covering module structure, CSV parsing, calculation logic, and JSON report generation. Set meeting budget to 5. Tests are written using pytest style for direct execution.
