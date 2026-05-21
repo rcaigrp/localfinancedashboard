@@ -1,22 +1,22 @@
 # Local Finance Dashboard
 
-A Python module to parse financial transactions and generate summary reports.
+A local dashboard to track expenses and income.
 
 ## Goal
-Build a local finance dashboard.
+Create a local finance dashboard to track expenses and income.
 
 ## Acceptance Criteria
 1. `finance_dashboard` module exists and can be imported.
-2. `parse_transactions` reads a CSV file and returns a list of transaction dicts.
-3. `calculate_totals` calculates total income, expenses, and net from transactions.
-4. `generate_report` writes a summary JSON report to a specified file path.
+2. `add_transaction` function updates the ledger correctly.
+3. `generate_report` function returns a summary dict of income/expenses.
+4. `save_report` function writes a report to a file.
 
 ## Status
-Active - Meeting 0/5 held.
+ACTIVE - Meeting 0/5 held.
 
 ## Completed Work
-- Created project.json and README.md.
-- Created acceptance_tests.py to define completion criteria.
+- Defined project scope and acceptance criteria.
+- Created `acceptance_tests.py` to validate core logic.
 
 ## Next Steps
-Implement `finance_dashboard.py` with the required functions.
+Implement `finance_dashboard.py` with core functions.

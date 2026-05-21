@@ -1,10 +1,10 @@
 {
-  "goal": "Build a local finance dashboard",
+  "goal": "Create a local finance dashboard to track expenses and income.",
   "acceptance_criteria": [
     "finance_dashboard module exists and can be imported",
-    "parse_transactions function reads a CSV file and returns a list of transaction dicts",
-    "calculate_totals function calculates total income, expenses, and net from transactions",
-    "generate_report function writes a summary JSON report to a specified file path"
+    "add_transaction function updates the ledger correctly",
+    "generate_report function returns a summary dict of income/expenses",
+    "save_report function writes a report to a file"
   ],
   "meeting_budget": 5,
   "meetings_held": 0,
