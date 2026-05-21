@@ -1,24 +1,18 @@
-def add_transaction(ledger, description, amount, category='general'):
-    ledger.append({
-        'description': description,
-        'amount': amount,
-        'category': category,
-        'type': 'income' if amount > 0 else 'expense'
-    })
-    return ledger
+import json
 
-def generate_report(ledger):
-    income = sum(tx['amount'] for tx in ledger if tx['type'] == 'income')
-    expenses = sum(abs(tx['amount']) for tx in ledger if tx['type'] != 'income')
-    return {
-        'income': income,
-        'expenses': expenses,
-        'net_balance': income - expenses,
-        'transaction_count': len(ledger)
-    }
+_ledger = []
 
-def save_report(report, filepath):
-    import json
+def add_transaction(amount, category, type='expense'):
+    global _ledger
+    _ledger.append({'amount': amount, 'category': category, 'type': type})
+
+def generate_report():
+    income = sum(t['amount'] for t in _ledger if t['type'] == 'income')
+    expenses = sum(t['amount'] for t in _ledger if t['type'] == 'expense')
+    return {'income': income, 'expenses': expenses, 'net_balance': income - expenses}
+
+def save_report(filepath):
+    report = generate_report()
     with open(filepath, 'w') as f:
-        json.dump(report, f, indent=2)
+        json.dump(report, f)
     return filepath

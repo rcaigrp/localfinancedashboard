@@ -12,12 +12,12 @@ Create a local finance dashboard to track expenses and income.
 4. `save_report` function writes a report to a file.
 
 ## Status
-ACTIVE - Meeting 1/5 held.
+ACTIVE - Meeting 2/5 held.
 
 ## Completed Work
 - Defined project scope and acceptance criteria.
-- Created `acceptance_tests.py` to validate core logic.
 - Implemented `finance_dashboard.py` with `add_transaction`, `generate_report`, and `save_report` functions.
+- Created `acceptance_tests.py` to validate core logic.
 
 ## Next Steps
 - Run acceptance tests to verify implementation.
