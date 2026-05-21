@@ -3,7 +3,7 @@
 A local dashboard to track expenses and income.
 
 ## Goal
-Create a local finance dashboard to track expenses and income.
+Create a local dashboard to track expenses and income.
 
 ## Acceptance Criteria
 1. `finance_dashboard` module exists and can be imported.
@@ -12,11 +12,13 @@ Create a local finance dashboard to track expenses and income.
 4. `save_report` function writes a report to a file.
 
 ## Status
-ACTIVE - Meeting 0/5 held.
+ACTIVE - Meeting 1/5 held.
 
 ## Completed Work
 - Defined project scope and acceptance criteria.
 - Created `acceptance_tests.py` to validate core logic.
+- Implemented `finance_dashboard.py` with core functions.
+- Ran acceptance tests.
 
 ## Next Steps
-Implement `finance_dashboard.py` with core functions.
+Monitor test results and iterate if needed. Otherwise, close project.

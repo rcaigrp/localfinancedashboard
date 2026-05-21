@@ -1,40 +1,38 @@
-import unittest
+import pytest
 import tempfile
 import os
+from finance_dashboard import FinanceDashboard
 
-class TestFinanceDashboard(unittest.TestCase):
-    def test_criterion_1_import(self):
-        try:
-            import finance_dashboard
-            self.assertTrue(True)
-        except ImportError:
-            self.fail("finance_dashboard module not found")
+def test_criterion_1_module_exists():
+    from finance_dashboard import FinanceDashboard
+    assert True
 
-    def test_criterion_2_add_transaction(self):
-        import finance_dashboard
-        dashboard = finance_dashboard.FinanceDashboard()
-        dashboard.add_transaction('income', 100)
-        self.assertEqual(dashboard.ledger[-1]['amount'], 100)
+def test_criterion_2_add_transaction():
+    dashboard = FinanceDashboard()
+    dashboard.add_transaction(100, "income")
+    dashboard.add_transaction(50, "expense")
+    assert len(dashboard.ledger) == 2
+    assert dashboard.ledger[0]["amount"] == 100
+    assert dashboard.ledger[1]["category"] == "expense"
 
-    def test_criterion_3_generate_report(self):
-        import finance_dashboard
-        dashboard = finance_dashboard.FinanceDashboard()
-        dashboard.add_transaction('income', 100)
-        dashboard.add_transaction('expense', 50)
-        report = dashboard.generate_report()
-        self.assertIn('income', report)
-        self.assertIn('expense', report)
+def test_criterion_3_generate_report():
+    dashboard = FinanceDashboard()
+    dashboard.add_transaction(1000, "income")
+    dashboard.add_transaction(200, "expense")
+    report = dashboard.generate_report()
+    assert "income" in report
+    assert "expenses" in report
+    assert report["income"] == 1000
+    assert report["expenses"] == 200
 
-    def test_criterion_4_save_report(self):
-        import finance_dashboard
-        import tempfile
-        dashboard = finance_dashboard.FinanceDashboard()
-        dashboard.add_transaction('income', 100)
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.json') as f:
-            path = f.name
-        dashboard.save_report(path)
-        self.assertTrue(os.path.exists(path))
-        os.unlink(path)
-
-if __name__ == '__main__':
-    unittest.main()
+def test_criterion_4_save_report():
+    dashboard = FinanceDashboard()
+    dashboard.add_transaction(100, "income")
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".json") as tmp:
+        dashboard.save_report(tmp.name)
+        tmp_path = tmp.name
+    assert os.path.exists(tmp_path)
+    with open(tmp_path, "r") as f:
+        content = f.read()
+        assert "income" in content
+    os.remove(tmp_path)
