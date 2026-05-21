@@ -1,31 +1,24 @@
-import json
-import os
-from typing import Dict, List, Any
-
-def add_transaction(ledger: Dict[str, Any], transaction: Dict[str, Any]) -> Dict[str, Any]:
-    """Updates the ledger with a new transaction."""
-    ledger['transactions'].append(transaction)
+def add_transaction(ledger, description, amount, category='general'):
+    ledger.append({
+        'description': description,
+        'amount': amount,
+        'category': category,
+        'type': 'income' if amount > 0 else 'expense'
+    })
     return ledger
 
-def generate_report(ledger: Dict[str, Any]) -> Dict[str, Any]:
-    """Returns a summary dict of income/expenses."""
-    income = 0.0
-    expenses = 0.0
-    for t in ledger.get('transactions', []):
-        if t.get('type') == 'income':
-            income += t.get('amount', 0.0)
-        elif t.get('type') == 'expense':
-            expenses += t.get('amount', 0.0)
+def generate_report(ledger):
+    income = sum(tx['amount'] for tx in ledger if tx['type'] == 'income')
+    expenses = sum(abs(tx['amount']) for tx in ledger if tx['type'] != 'income')
     return {
-        'total_income': income,
-        'total_expenses': expenses,
-        'net': income - expenses,
-        'transaction_count': len(ledger.get('transactions', []))
+        'income': income,
+        'expenses': expenses,
+        'net_balance': income - expenses,
+        'transaction_count': len(ledger)
     }
 
-def save_report(ledger: Dict[str, Any], filename: str) -> str:
-    """Writes a report to a file."""
-    report = generate_report(ledger)
-    with open(filename, 'w') as f:
-        json.dump(report, f)
-    return filename
+def save_report(report, filepath):
+    import json
+    with open(filepath, 'w') as f:
+        json.dump(report, f, indent=2)
+    return filepath

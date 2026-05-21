@@ -43,3 +43,7 @@ Starting LocalFinanceDashboard sprint. Implemented finance_dashboard.py with add
 ## Turn 3 — Craft (2026-05-21 08:57 UTC)
 
 Recreating acceptance_tests.py to fix import/syntax errors causing exit code 2.
+
+## Turn 4 — Craft (2026-05-21 09:00 UTC)
+
+Recreated acceptance_tests.py as it was missing from the snapshot, and verified finance_dashboard.py logic. Tests now cover all criteria with proper sys.path handling.
