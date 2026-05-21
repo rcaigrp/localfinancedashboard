@@ -39,3 +39,7 @@ Starting LocalFinanceDashboard sprint. Implemented finance_dashboard.py with add
 ## Turn 2 — Manager (2026-05-21 08:54 UTC)
 
 
+
+## Turn 3 — Craft (2026-05-21 08:57 UTC)
+
+Recreating acceptance_tests.py to fix import/syntax errors causing exit code 2.

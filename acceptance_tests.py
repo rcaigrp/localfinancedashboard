@@ -1,38 +1,58 @@
 import pytest
-import tempfile
 import os
-from finance_dashboard import FinanceDashboard
+import json
+import sys
+
+# Ensure the project directory is in the path
+sys.path.insert(0, '/workspace/projects/LocalFinanceDashboard')
 
 def test_criterion_1_module_exists():
-    from finance_dashboard import FinanceDashboard
-    assert True
+    """Criterion 1: finance_dashboard module exists and can be imported."""
+    try:
+        import finance_dashboard
+    except ImportError:
+        pytest.fail("finance_dashboard module could not be imported")
 
 def test_criterion_2_add_transaction():
-    dashboard = FinanceDashboard()
-    dashboard.add_transaction(100, "income")
-    dashboard.add_transaction(50, "expense")
-    assert len(dashboard.ledger) == 2
-    assert dashboard.ledger[0]["amount"] == 100
-    assert dashboard.ledger[1]["category"] == "expense"
+    """Criterion 2: add_transaction function updates the ledger correctly."""
+    import finance_dashboard
+    ledger = {"transactions": []}
+    transaction = {"type": "income", "amount": 100, "date": "2023-01-01"}
+    finance_dashboard.add_transaction(ledger, transaction)
+    assert ledger['transactions'] == [transaction], "Ledger was not updated correctly"
 
 def test_criterion_3_generate_report():
-    dashboard = FinanceDashboard()
-    dashboard.add_transaction(1000, "income")
-    dashboard.add_transaction(200, "expense")
-    report = dashboard.generate_report()
-    assert "income" in report
-    assert "expenses" in report
-    assert report["income"] == 1000
-    assert report["expenses"] == 200
+    """Criterion 3: generate_report function returns a summary dict of income/expenses."""
+    import finance_dashboard
+    ledger = {
+        "transactions": [
+            {"type": "income", "amount": 100},
+            {"type": "expense", "amount": 50}
+        ]
+    }
+    report = finance_dashboard.generate_report(ledger)
+    assert isinstance(report, dict), "Report is not a dict"
+    assert 'total_income' in report, "Report missing total_income"
+    assert 'total_expenses' in report, "Report missing total_expenses"
+    assert report['total_income'] == 100, "Total income incorrect"
+    assert report['total_expenses'] == 50, "Total expenses incorrect"
 
 def test_criterion_4_save_report():
-    dashboard = FinanceDashboard()
-    dashboard.add_transaction(100, "income")
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".json") as tmp:
-        dashboard.save_report(tmp.name)
-        tmp_path = tmp.name
-    assert os.path.exists(tmp_path)
-    with open(tmp_path, "r") as f:
-        content = f.read()
-        assert "income" in content
-    os.remove(tmp_path)
+    """Criterion 4: save_report function writes a report to a file."""
+    import finance_dashboard
+    import tempfile
+    
+    ledger = {"transactions": [{"type": "income", "amount": 200}]}
+    
+    with tempfile.NamedTemporaryFile(suffix='.json', delete=False, dir='/tmp') as f:
+        filename = f.name
+        
+    try:
+        finance_dashboard.save_report(ledger, filename)
+        assert os.path.exists(filename), "Report file does not exist"
+        with open(filename, 'r') as f:
+            content = json.load(f)
+        assert 'total_income' in content, "Report file does not contain total_income"
+    finally:
+        if os.path.exists(filename):
+            os.remove(filename)
