@@ -1,0 +1,1 @@
+{"goal": "Build a local finance dashboard to visualize personal spending.", "acceptance_criteria": ["Dashboard module exists and can be imported", "load_transactions function reads a CSV file", "calculate_spending returns spending by category", "render_dashboard writes an HTML report"], "meeting_budget": 5, "meetings_held": 0, "status": "active"}
