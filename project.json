@@ -1,1 +1,12 @@
-{"goal": "Build a local finance dashboard to visualize personal spending.", "acceptance_criteria": ["Dashboard module exists and can be imported", "load_transactions function reads a CSV file", "calculate_spending returns spending by category", "render_dashboard writes an HTML report"], "meeting_budget": 5, "meetings_held": 0, "status": "active"}
+{
+  "goal": "Create a local finance dashboard to track budgets and expenses.",
+  "acceptance_criteria": [
+    "dashboard module exists and can be imported",
+    "get_budget function returns user's budget data",
+    "get_expenses function returns user's expense data",
+    "save_dashboard writes dashboard data to a file"
+  ],
+  "meeting_budget": 4,
+  "meetings_held": 0,
+  "status": "active"
+}

@@ -1,18 +1,22 @@
 # Local Finance Dashboard
 
-A simple tool to visualize personal spending.
+A dashboard to track local finance budgets and expenses.
 
 ## Goal
-Build a local finance dashboard.
+Track budgets and expenses locally.
 
 ## Acceptance Criteria
-1. Dashboard module exists and can be imported.
-2. load_transactions reads a CSV.
-3. calculate_spending returns spending by category.
-4. render_dashboard writes an HTML report.
+1. `dashboard` module exists and can be imported.
+2. `get_budget` returns user's budget data.
+3. `get_expenses` returns user's expense data.
+4. `save_dashboard` writes dashboard data to a file.
 
 ## Status
-Active - Meeting 0/5 held.
+Active - Meeting 0/4 held.
+
+## Completed Work
+- Created `project.json` and `README.md`.
 
 ## Next Steps
-Implement dashboard module.
+- Implement `dashboard.py` with `get_budget`, `get_expenses`, and `save_dashboard`.
+- Write `acceptance_tests.py`.
